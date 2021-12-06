@@ -9,7 +9,7 @@ export const Articulos = (props) => {
     console.log(lastadd);
     return (
         <div style={styles.mdiv}>
-          {lastadd?<Card prod={lastadd}/>:null}
+          {lastadd?<Card texto={"Ultimo Agregado:"} prod={lastadd}/>:null}
             <div style={styles.div}>
 
                 {

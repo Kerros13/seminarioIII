@@ -1,6 +1,8 @@
-import { Fragment, useState, useEffect, useRef } from 'react'
+import { Fragment, useState, useEffect, useRef, createContext, useContext } from 'react'
 import { Articulos } from "./components/Articulos"
 import { Navbar } from './components/Navbar'
+import {Card} from './components/Articulos/card'
+
 
 // base de datos
 const informacion = {
@@ -15,7 +17,9 @@ const informacion = {
     //{id: 1, nombre: 'Homepod Mini', precio: 99, imagen: '/images/homepod-mini.jpg', cantidad: 2},
   ]
 }
-
+var item = informacion[Math.floor(Math.random()*informacion.length)];
+console.log(item)
+export const random = createContext(<Card texto={"Objeto del dia:"} prod={item}/>); //Context
 
 function App() {
   const [data, setData] = useState(informacion)
@@ -59,10 +63,12 @@ function App() {
     
   
   return (
-    <Fragment>
-      <Navbar cantidad={cantidad} productos={data.carrito}  borrar={borrar}  />
-      <Articulos agregarAlCarro={agregarAlCarro} data={data} lastadd={lastadd} />
-    </Fragment>
+    <random.Provider>
+      <Fragment>
+        <Navbar cantidad={cantidad} productos={data.carrito}  borrar={borrar}  />
+        <Articulos agregarAlCarro={agregarAlCarro} data={data} lastadd={lastadd} />
+      </Fragment>
+    </random.Provider>
   );
 }
 
